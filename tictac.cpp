@@ -86,7 +86,7 @@ void location(sf::Sprite &item, int y)
 //Victory check
 int winning(int arr[9]){
     if(((arr[0] == arr[1]) && (arr[1] == arr[2]) && (arr[0] != 0)) ||
-        ((arr[3] == arr[4])    && (arr[4] == arr[5]) && (arr[3] != 0)) ||
+        ((arr[3] == arr[4]) && (arr[4] == arr[5]) && (arr[3] != 0)) ||
         ((arr[6] == arr[7]) && (arr[7] == arr[8]) && (arr[6] != 0)) ||
         ((arr[0] == arr[3]) && (arr[3] == arr[6]) && (arr[0] != 0)) ||
         ((arr[1] == arr[4]) && (arr[4] == arr[7]) && (arr[1] != 0)) ||
@@ -126,7 +126,7 @@ int minimax(int arr[9], int who, int whoam)
             arr3[i] = 0;
         }
     }
-    int k=-1;
+    int k = -1;
     for(int i = 0; i < 9; i++)
     {
         if(arr[i] == 0)
@@ -203,7 +203,7 @@ int main()
     sf::Texture x_texture;
     sf::Sprite x_sprite[5];
     if (!x_texture.loadFromFile("resources/circles.png",
-                             sf::IntRect(0, 0, TILESIZE, TILESIZE)))
+                                sf::IntRect(0, 0, TILESIZE, TILESIZE)))
         return -1;
     for(int i = 0; i< 5; i++)    
         x_sprite[i].setTexture(x_texture);
@@ -212,8 +212,8 @@ int main()
     sf::Texture o_texture;
     sf::Sprite o_sprite[5];
     if (!o_texture.loadFromFile("resources/circles.png",
-                               sf::IntRect(TILESIZE, 0,
-                                              TILESIZE, 2 * TILESIZE)))
+                                sf::IntRect(TILESIZE, 0,
+                                            TILESIZE, 2 * TILESIZE)))
         return -1;    
     for(int i = 0; i< 5; i++)    
         o_sprite[i].setTexture(o_texture);
@@ -230,7 +230,7 @@ int main()
     TileMap map;
     int level[9] = {0, 1, 0, 1, 0, 1, 0, 1, 0};
     if (!map.load("resources/tileset1.png", sf::Vector2u(TILESIZE, TILESIZE),
-                  level, 3, 3))
+        level, 3, 3))
         return -1;
     int diff;
     cout << "Chose difficulty (0 - 50)\n";
@@ -255,10 +255,9 @@ int main()
     int arr[9] = {0};
     window.setKeyRepeatEnabled(false);
     int i = 0, j = 0, k = 0, fin = 0;
-    
-            window.clear();  
-            window.draw(map); 
-            window.draw(text);
+    window.clear();  
+    window.draw(map); 
+    window.draw(text);
     int wh = rand()%2;    
     // run the main loop
     while (window.isOpen())
@@ -271,106 +270,106 @@ int main()
                 window.close();
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                    if(event.mouseButton.x >= 408 &&
+                if(event.mouseButton.x >= 408 &&
                    event.mouseButton.y <= 428 && 
                    event.mouseButton.y >= 384)
                 {  
-                        game = 1;
-                        j = 0;
-                        i = 0;
-                        k = 0;
-                        wh = (wh + 1) % 2;
-                    fin = 0;
-                        for(int i = 0; i < 9; i++)
-                            arr[i] = 0;
-                   }
-               }
+                    game = 1;
+                    j = 0;
+                    i = 0;
+                    k = 0;
+                    wh = (wh + 1) % 2;
+                	fin = 0;
+                    for(int i = 0; i < 9; i++)
+                        arr[i] = 0;
+                }
+            }
             if(game == 1 && wh == 0)
             {
-                   if (event.type == sf::Event::MouseButtonPressed)
-                   {                            
-                        if(event.mouseButton.x <= 190 &&
-                       event.mouseButton.y <= 190)
-                    {
-                            if(i == 0)
-                        {
-                            X[j] = event.mouseButton.y / TILESIZE * 3 +
-                                       event.mouseButton.x / TILESIZE;
-                            if(arr[X[j]] == 0)
-                            {                            
-                                location(x_sprite[j], X[j]);
-                                arr[X[j]] = 1;
-                                i = 1;
-                                    j += 1;
-                            }
-                        }
-                        if(winning(arr))
-                        {
-                            game = 0;
-                            fin = 1;
-                            text2.setString("Player WIN");
-                            break;    
-                        } 
-                        if(j > 4)
-                        {
-                            game = 0;
-                            fin = 1;
-                            text2.setString("Draw");
-                        }
-                        if(k < 4 && i == 1)
-                        {
-                            O[k] = AI(arr, 2, diff);
-                            location(o_sprite[k], O[k]);
-                            arr[O[k]] = 2;
-                            k += 1;
-                            i = 0;
-                        }        
-                        if(winning(arr))
-                        {
-                            game = 0;
-                            fin = 1;
-                            text2.setString("Computer WIN");
-                        }
+        		if (event.type == sf::Event::MouseButtonPressed)
+                {                            
+	                if(event.mouseButton.x <= 190 &&
+	                   event.mouseButton.y <= 190)
+	                {
+	                    if(i == 0)
+	                    {
+	                        X[j] = event.mouseButton.y / TILESIZE * 3 +
+	                               event.mouseButton.x / TILESIZE;
+	                        if(arr[X[j]] == 0)
+	                        {                            
+	                            location(x_sprite[j], X[j]);
+	                            arr[X[j]] = 1;
+	                            i = 1;
+	                            j += 1;
+	                        }
+	                    }
+	                    if(winning(arr))
+	                    {
+	                        game = 0;
+	                        fin = 1;
+	                        text2.setString("Player WIN");
+	                        break;    
+	                    } 
+	                    if(j > 4)
+	                    {
+	                        game = 0;
+	                        fin = 1;
+	                        text2.setString("Draw");
+	                    }
+	                    if(k < 4 && i == 1)
+	                    {
+	                        O[k] = AI(arr, 2, diff);
+	                        location(o_sprite[k], O[k]);
+	                        arr[O[k]] = 2;
+	                        k += 1;
+	                        i = 0;
+	                    }        
+	                    if(winning(arr))
+	                    {
+	                        game = 0;
+	                        fin = 1;
+	                        text2.setString("Computer WIN");
+	                    }
                     }
                     
-                       //    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+                    //    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
                     //    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
                 }
             }
             
             if(game == 1 && wh == 1)
             {
-                    if(i == 0)
-                    {        
-                        O[k] = AI(arr, 2, diff);
-                        location(o_sprite[k], O[k]);
-                        arr[O[k]] = 2;
-                        k += 1;
-                        i = 1;
-                    }        
-                                                
-                    if(winning(arr))
-                    {
-                        game = 0;
-                        fin = 1;
-                        text2.setString("Computer WIN");
-                        break;    
-                    } 
-                    
-                    if(k > 4)
-                    {
-                        game = 0;
-                        fin = 1;
-                        text2.setString("Draw");
-                    }
-                    
-                       if (event.type == sf::Event::MouseButtonPressed)
-                       {                            
-                           if(event.mouseButton.x <= 190 &&
+                if(i == 0)
+                {        
+                    O[k] = AI(arr, 2, diff);
+                    location(o_sprite[k], O[k]);
+                    arr[O[k]] = 2;
+                    k += 1;
+                    i = 1;
+                }        
+                                            
+                if(winning(arr))
+                {
+                    game = 0;
+                    fin = 1;
+                    text2.setString("Computer WIN");
+                    break;    
+                } 
+                
+                if(k > 4)
+                {
+                    game = 0;
+                    fin = 1;
+                    text2.setString("Draw");
+                }
+                
+                   if (event.type == sf::Event::MouseButtonPressed)
+                   {                            
+                        if(event.mouseButton.x <= 190 &&
                            event.mouseButton.y <= 190)
-                           {
-                               if(k < 5 && i == 1)
-                               {
+                        {
+                            if(k < 5 && i == 1)
+                            {
                                 X[j] = event.mouseButton.y / TILESIZE * 3 +
                                        event.mouseButton.x / TILESIZE;
                                 if(arr[X[j]] == 0){                            
@@ -387,11 +386,9 @@ int main()
                                 }
                             }        
                         }
-                       //    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
+                    //    std::cout << "mouse x: " << event.mouseButton.x << std::endl;
                     //    std::cout << "mouse y: " << event.mouseButton.y << std::endl;
                     }
-                    
-                
             }
             
             window.clear();  
